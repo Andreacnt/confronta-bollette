@@ -1,8 +1,8 @@
 name: aggiorna-arera
+# Manuale: il Portale Offerte blocca gli IP dei runner (403).
+# Aggiorna da casa con python aggiorna_offerte_arera.py --inline arera_data.js e pusha.
 
 on:
-  schedule:
-    - cron: "0 6 * * 1"
   workflow_dispatch:
 
 permissions:

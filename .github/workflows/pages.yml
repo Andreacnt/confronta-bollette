@@ -23,8 +23,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
-      - run: python aggiorna_offerte_arera.py --inline arera_data.js
-      - run: mkdir _site && cp index.html app.js offerte.json arera_data.js _site/
+      - run: |
+          mkdir _site
+          cp index.html app.js offerte.json offerte_arera.json _site/
+          python -c "import json; d=json.load(open('offerte_arera.json',encoding='utf-8')); open('_site/arera_data.js','w',encoding='utf-8').write('window.ARERA_DATA='+json.dumps(d,ensure_ascii=False,separators=(',',':'))+';')"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
