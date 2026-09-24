@@ -89,7 +89,16 @@ function cerca(testo, tipo) {
     if (y.length === 2) y = "20" + y;
     mese = mp[2] + "/" + y;
   }
-  return { consumo, totale: tot, giorni: gg, consumo_annuo, spesa_annua, fasce, mese, consumo_mese: consumo };
+  let scadenza = "";
+  const mSc = testo.match(/DATA DI SCADENZA DELL['\s]OFFERTA:\s*(\d{2})[\/.\-](\d{2})[\/.\-](\d{2,4})/i)
+    || testo.match(/SCADENZA\s*(DELL['\s]OFFERTA|OFFERTA)?\s*:?\s*(\d{2})[\/.\-](\d{2})[\/.\-](\d{2,4})/i);
+  if (mSc) {
+    const g = mSc.slice(-3);
+    let y = g[2];
+    if (y.length === 2) y = "20" + y;
+    scadenza = `${y}-${g[1]}-${g[0]}`;
+  }
+  return { consumo, totale: tot, giorni: gg, consumo_annuo, spesa_annua, fasce, mese, consumo_mese: consumo, scadenza };
 }
 
 function tipoDaTesto(t, nome) {
@@ -107,7 +116,9 @@ function renderBollette() {
   b.innerHTML = "";
   bollette.forEach((x, i) => {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${x.file}</td><td>${x.tipo}</td><td>${x.consumo_annuo} ${x.tipo === "luce" ? "kWh" : "Smc"}</td><td>€${x.spesa_annua.toFixed(2)}</td>`;
+    const gg = ggScadenza(x.scadenza);
+    const sc = !x.scadenza ? "—" : gg != null && gg < 60 ? `<b class="warn">${dataIt(x.scadenza)}</b>` : dataIt(x.scadenza);
+    tr.innerHTML = `<td>${x.file}</td><td>${x.tipo}</td><td>${x.consumo_annuo} ${x.tipo === "luce" ? "kWh" : "Smc"}</td><td>€${x.spesa_annua.toFixed(2)}</td><td>${sc}</td>`;
     const td = document.createElement("td");
     const btn = document.createElement("button");
     btn.textContent = "×";
@@ -436,14 +447,22 @@ function classificaArera() {
 }
 
 function mostraScadenza() {
-  const sc = ($("mia-scadenza") || {}).value || "";
   const a = $("alert");
-  if (!sc) { a.hidden = true; return; }
-  const gg = Math.round((new Date(sc) - new Date()) / 864e5);
+  const trovate = [];
+  ["luce", "gas"].forEach((tipo) => {
+    const b = bollette.filter((x) => x.tipo === tipo && x.scadenza).sort((x, y) => (x.scadenza < y.scadenza ? -1 : 1))[0];
+    if (b) trovate.push({ etichetta: `offerta ${tipo}`, sc: b.scadenza });
+  });
+  const manuale = ($("mia-scadenza") || {}).value || "";
+  if (!trovate.length && manuale) trovate.push({ etichetta: "offerta attuale", sc: manuale });
+  if (!trovate.length) { a.hidden = true; return; }
   a.hidden = false;
-  a.innerHTML = gg < 0 ? `<b class="warn">⚠ La tua offerta attuale è SCADUTA il ${dataIt(sc)}.</b>`
-    : gg < 60 ? `<b class="warn">⚠ La tua offerta attuale scade tra ${gg} giorni (${dataIt(sc)}): confronta ora le alternative.</b>`
-    : `La tua offerta attuale scade tra ${gg} giorni (${dataIt(sc)}).`;
+  a.innerHTML = trovate.map(({ etichetta, sc }) => {
+    const gg = Math.round((new Date(sc) - new Date()) / 864e5);
+    return gg < 0 ? `<b class="warn">⚠ La tua ${etichetta} è SCADUTA il ${dataIt(sc)}.</b>`
+      : gg < 60 ? `<b class="warn">⚠ La tua ${etichetta} scade tra ${gg} giorni (${dataIt(sc)}): confronta ora le alternative.</b>`
+      : `La tua ${etichetta} scade tra ${gg} giorni (${dataIt(sc)}).`;
+  }).join("<br>");
 }
 
 async function init() {
@@ -500,7 +519,8 @@ async function init() {
         const tipo = tipoDaTesto(t, f.name);
         const r = cerca(t, tipo);
         if (r.consumo_annuo && r.spesa_annua) {
-          bollette.push({ file: f.name, tipo, consumo_annuo: r.consumo_annuo, spesa_annua: r.spesa_annua, mese: r.mese, consumo_mese: r.consumo_mese });
+          bollette.push({ file: f.name, tipo, consumo_annuo: r.consumo_annuo, spesa_annua: r.spesa_annua, mese: r.mese, consumo_mese: r.consumo_mese, scadenza: r.scadenza });
+          if (r.scadenza) mostraScadenza();
           if (r.fasce) {
             $("tariffa").value = "fasce";
             $("p-f1").value = r.fasce[0]; $("p-f2").value = r.fasce[1]; $("p-f3").value = r.fasce[2];
@@ -561,6 +581,8 @@ async function init() {
     bollette.length = 0;
     ultimo = [];
     $("pdf").value = "";
+    $("mia-scadenza").value = "";
+    $("alert").hidden = true;
     delete $("riepilogo").dataset.fasce;
     renderBollette();
     $("verdetto").classList.add("mut");
@@ -572,12 +594,13 @@ async function init() {
 
   $("demo").onclick = () => {
     bollette.length = 0;
-    bollette.push({ file: "demo", tipo: "luce", consumo_annuo: 2519, spesa_annua: 685.09 });
-    bollette.push({ file: "demo", tipo: "gas", consumo_annuo: 801, spesa_annua: 902.86 });
+    bollette.push({ file: "demo", tipo: "luce", consumo_annuo: 2519, spesa_annua: 685.09, scadenza: "2026-10-31" });
+    bollette.push({ file: "demo", tipo: "gas", consumo_annuo: 801, spesa_annua: 902.86, scadenza: "2026-10-31" });
     $("tariffa").value = "fasce";
     $("p-f1").value = 20; $("p-f2").value = 34; $("p-f3").value = 45;
     $("riepilogo").dataset.fasce = "Ripartizione fasce 20/34/45 dalle tue letture";
     renderBollette();
+    mostraScadenza();
     confronta(); classificaArera();
   };
 

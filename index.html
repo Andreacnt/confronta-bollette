@@ -39,7 +39,7 @@ label:has(input[type=checkbox]){grid-template-columns:auto 1fr;align-items:cente
 <div class="row">
 <label>Bollette in PDF<input type="file" id="pdf" accept="application/pdf" multiple></label>
 <button id="demo">Prova con consumi di esempio</button>
-<label>La mia offerta attuale scade il<input type="date" id="mia-scadenza"></label>
+<label>La mia offerta scade il (se non è nel PDF)<input type="date" id="mia-scadenza"></label>
 <button id="reset" class="ghost">Fai una nuova ricerca</button>
 <button id="salva" class="ghost">Salva ricerca</button>
 <label>Apri ricerca salvata<input type="file" id="carica" accept="application/json"></label>
@@ -53,7 +53,7 @@ label:has(input[type=checkbox]){grid-template-columns:auto 1fr;align-items:cente
 </div></details>
 <p id="riepilogo" class="mut">Nessuna bolletta: carica i PDF oppure prova con consumi di esempio.</p>
 <div id="storico"></div>
-<table id="tab-bollette" hidden><thead><tr><th>Bolletta</th><th>Luce/Gas</th><th>Consumo annuo</th><th>Spesa annua</th><th></th></tr></thead><tbody></tbody></table>
+<table id="tab-bollette" hidden><thead><tr><th>Bolletta</th><th>Luce/Gas</th><th>Consumo annuo</th><th>Spesa annua</th><th>Offerta scade il</th><th></th></tr></thead><tbody></tbody></table>
 </section>
 
 <section class="card">

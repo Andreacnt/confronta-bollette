@@ -20,6 +20,7 @@ class Bolletta:
     giorni: int
     consumo_annuo: float = 0.0
     spesa_annua: float = 0.0
+    scadenza_offerta: str = ""
     fascia_f1: float = 0.0
     fascia_f2: float = 0.0
     fascia_f3: float = 0.0
@@ -168,6 +169,18 @@ def cerca_spesa_annua(testo: str) -> float | None:
     return None
 
 
+def cerca_scadenza_offerta(testo: str) -> str:
+    m = re.search(r"DATA DI SCADENZA DELL['\s]OFFERTA:\s*(\d{2})[/\.\-](\d{2})[/\.\-](\d{2,4})", testo, re.IGNORECASE)
+    if not m:
+        m = re.search(r"SCADENZA\s*(?:DELL['\s]OFFERTA|OFFERTA)?\s*:?\s*(\d{2})[/\.\-](\d{2})[/\.\-](\d{2,4})", testo, re.IGNORECASE)
+    if not m:
+        return ""
+    a = m.group(3)
+    if len(a) == 2:
+        a = "20" + a
+    return f"{a}-{m.group(2)}-{m.group(1)}"
+
+
 def cerca_fasce(testo: str) -> tuple[float, float, float] | None:
     righe: list[tuple[float, float, float]] = []
     for m in re.finditer(r"(\d{2}[/\.\-]\d{2}[/\.\-]\d{2,4})\s+(\d+)\s+(\d+)\s+(\d+)\s+\w+", testo):
@@ -253,6 +266,7 @@ def analizza_pdf(path: Path) -> Bolletta | None:
         giorni=giorni,
         consumo_annuo=cerca_consumo_annuo(testo, tipo) or 0.0,
         spesa_annua=cerca_spesa_annua(testo) or 0.0,
+        scadenza_offerta=cerca_scadenza_offerta(testo),
         fascia_f1=fasce[0] if fasce else 0.0,
         fascia_f2=fasce[1] if fasce else 0.0,
         fascia_f3=fasce[2] if fasce else 0.0,
@@ -370,6 +384,7 @@ def main() -> int:
             bollette.append(b)
             costo_unit = b.totale_euro / b.consumo if b.consumo else 0
             extra = f" | fasce {b.fascia_f1:.0f}/{b.fascia_f2:.0f}/{b.fascia_f3:.0f}" if b.fascia_f1 else ""
+            extra += f" | offerta scade {b.scadenza_offerta}" if b.scadenza_offerta else ""
             print(f"[OK] {b.file} | {b.tipo} | {b.fornitore} | {b.consumo} {b.unita} | €{b.totale_euro:.2f} | {b.giorni}gg | {costo_unit:.4f} €/{b.unita} | annuo {b.consumo_annuo} {b.unita}{extra}")
 
     bollette += carica_manuale(Path(args.manuale))
@@ -475,6 +490,9 @@ def main() -> int:
         print(f"[!] Offerte non caricate: {e}", file=sys.stderr)
         return 1
     grezzo: list[dict] = []
+    for b in bollette:
+        if b.scadenza_offerta:
+            grezzo.append({"nome": f"Bolletta {b.tipo} ({b.file})", "scadenza_offerta": b.scadenza_offerta})
     for f in (Path(args.offerte), base / "mie_offerte.json"):
         if f.exists():
             try:
