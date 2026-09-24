@@ -353,7 +353,9 @@ function verdetto(bestL, bestG) {
   const risp = Math.round(spesa - stima);
   el.classList.remove("mut");
   if (risp > 50) {
-    const nomi = [bestL && `luce con ${bestL.o.venditore} (${bestL.o.nome})`, bestG && `gas con ${bestG.o.venditore} (${bestG.o.nome})`].filter(Boolean).join(" e ");
+    const stesso = bestL && bestG && (bestL.o.venditore || "").toLowerCase() === (bestG.o.venditore || "").toLowerCase();
+    const nomi = stesso ? `${bestL.o.venditore} per luce e gas`
+      : [bestL && `luce con ${bestL.o.venditore} (${bestL.o.nome})`, bestG && `gas con ${bestG.o.venditore} (${bestG.o.nome})`].filter(Boolean).join(" e ");
     const nota = arera.conTot === false ? " (confronto sulla sola energia, senza oneri e IVA)" : "";
     el.innerHTML = `💡 <b>Ti conviene cambiare.</b> Passando a ${nomi} spenderesti circa <b>€${Math.round(stima)}/anno</b> invece di €${Math.round(spesa)}: <b class="best">risparmi circa €${risp} all'anno</b>${nota}.${barre(spesa, stima)}`;
   } else if (risp >= 0) {
@@ -417,14 +419,7 @@ function classificaArera() {
     full.appendChild(hf);
     tabellaArera(full, bestG.slice(0, n), "Smc", conTot);
   }
-  if (ut === "dual" && bestL.length && bestG.length) {
-    const mix = document.createElement("p");
-    mix.innerHTML = `<b class="best">Consiglio mix:</b> luce con ${bestL[0].o.venditore} + gas con ${bestG[0].o.venditore} = <b>bolletta stimata €${(bestL[0].tot + bestG[0].tot).toFixed(0)}/anno</b>. Due fornitori diversi, due contratti: risparmi di più ma gestisci due bollette.`;
-    el.appendChild(mix);
-    const mix2 = document.createElement("p");
-    mix2.innerHTML = mix.innerHTML;
-    full.appendChild(mix2);
-  }
+  if (ut === "dual" && bestL.length && bestG.length) classificaFinale(el, bestL, bestG, conTot);
   const rinnovo = offerte.find((o) => /octopus fissa 12m set/i.test(o.nome || ""));
   if (rinnovo && (bestL.length || bestG.length)) {
     const l = bollette.filter((x) => x.tipo === "luce");
@@ -488,6 +483,92 @@ function classificaMercato() {
   tabellaArera(el, rank(arera.gas, (o) => pgArera(o, psv), pr.gas, (p, qu) => totaleGas(p, qu, pr.gas, ambito)), "Smc", conTot);
 }
 
+function aggiornaBarraDb(extra) {
+  const b = $("dbbar");
+  if (!b) return;
+  b.textContent = arera.luce.length
+    ? `Database ARERA aggiornato al ${dataIt(arera.data)} (${arera.luce.length + arera.gas.length} offerte)${extra || ""}`
+    : "Database ARERA non caricato.";
+}
+
+async function verificaAggiornamenti() {
+  const b = $("dbbar");
+  const istr = "Per aggiornare, da PC esegui: python aggiorna_offerte_arera.py --inline arera_data.js e ricarica la pagina.";
+  try {
+    const r = await fetch("https://www.ilportaleofferte.it/portaleOfferte/it/open-data.page", { cache: "no-store" });
+    if (!r.ok) throw 0;
+    const t = await r.text();
+    let max = "";
+    const re = /PO_Offerte_[EG]_MLIBERO_(\d{8})/g;
+    let m;
+    while ((m = re.exec(t))) if (m[1] > max) max = m[1];
+    if (!max) throw 0;
+    const mia = (arera.data || "").replaceAll("-", "");
+    if (max > mia) {
+      b.textContent = `C'è un aggiornamento! Dati online al ${max.slice(6)}/${max.slice(4, 6)}/${max.slice(0, 4)}, tu hai quelli del ${dataIt(arera.data)}. ${istr}`;
+    } else {
+      b.textContent = `Hai già gli ultimi dati ARERA (${dataIt(arera.data)}). Ricontrolla tra qualche giorno.`;
+    }
+  } catch {
+    b.textContent = `Controllo non riuscito dal browser (serve connessione al Portale Offerte). ${istr}`;
+  }
+}
+
+function classificaFinale(el, bestL, bestG, conTot) {
+  const val = (r) => (arera.conTot === false ? r.costo : r.tot);
+  const col = conTot ? "Bolletta stimata/anno" : "Costo energia/anno";
+  const perVend = {};
+  bestL.forEach((r) => {
+    const k = (r.o.venditore || "").toLowerCase();
+    if (!perVend[k]) perVend[k] = {};
+    if (!perVend[k].l) perVend[k].l = r;
+  });
+  bestG.forEach((r) => {
+    const k = (r.o.venditore || "").toLowerCase();
+    if (!perVend[k]) perVend[k] = {};
+    if (!perVend[k].g) perVend[k].g = r;
+  });
+  const singoli = Object.values(perVend).filter((v) => v.l && v.g)
+    .map((v) => ({ vend: v.l.o.venditore, nl: v.l.o.nome, ng: v.g.o.nome, tot: val(v.l) + val(v.g) }))
+    .sort((a, b) => a.tot - b.tot).slice(0, 3);
+  const combos = [];
+  bestL.slice(0, 3).forEach((l) => bestG.slice(0, 3).forEach((g) => {
+    if ((l.o.venditore || "").toLowerCase() === (g.o.venditore || "").toLowerCase()) return;
+    combos.push({ a: `${l.o.venditore} (${l.o.nome})`, b: `${g.o.venditore} (${g.o.nome})`, tot: val(l) + val(g) });
+  }));
+  combos.sort((a, b) => a.tot - b.tot);
+  const h1 = document.createElement("h2");
+  h1.textContent = "Finale: luce e gas con un solo gestore";
+  el.appendChild(h1);
+  const t1 = document.createElement("table");
+  const r1 = document.createElement("tbody");
+  singoli.forEach((s, i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td class="${i === 0 ? "best" : ""}">${i + 1}</td><td><b>${s.vend}</b><br><span class="mut">${s.nl} + ${s.ng}</span></td><td class="${i === 0 ? "best" : ""}">€${s.tot.toFixed(0)}</td>`;
+    r1.appendChild(tr);
+  });
+  t1.innerHTML = `<thead><tr><th>#</th><th>Gestore unico</th><th>${col}</th></tr></thead>`;
+  t1.appendChild(r1);
+  el.appendChild(t1);
+  const h2 = document.createElement("h2");
+  h2.textContent = "Finale: luce e gas con due gestori (mix)";
+  el.appendChild(h2);
+  const t2 = document.createElement("table");
+  const r2 = document.createElement("tbody");
+  combos.slice(0, 3).forEach((s, i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td class="${i === 0 ? "best" : ""}">${i + 1}</td><td>Luce: ${s.a}<br>Gas: ${s.b}</td><td class="${i === 0 ? "best" : ""}">€${s.tot.toFixed(0)}</td>`;
+    r2.appendChild(tr);
+  });
+  t2.innerHTML = `<thead><tr><th>#</th><th>Combinazione</th><th>${col}</th></tr></thead>`;
+  t2.appendChild(r2);
+  el.appendChild(t2);
+  const p = document.createElement("p");
+  p.className = "mut";
+  p.textContent = "Un solo gestore = una bolletta e un'assistenza; due gestori = massimo risparmio ma due contratti.";
+  el.appendChild(p);
+}
+
 function mostraScadenza() {
   const a = $("alert");
   const trovate = [];
@@ -525,6 +606,7 @@ async function init() {
     if (arera.pun_rif) $("pun").value = arera.pun_rif;
     if (arera.psv_rif) $("psv").value = arera.psv_rif;
     $("stato-arera").textContent = `${arera.luce.length + arera.gas.length} offerte del ${arera.data}${fonte}`;
+    aggiornaBarraDb(fonte);
     classificaMercato();
   };
   try {
@@ -650,6 +732,7 @@ async function init() {
   };
 
   $("stampa").onclick = () => window.print();
+  $("aggiorna-db").onclick = verificaAggiornamenti;
   $("csv").onclick = () => {
     if (!ultimo.length) return;
     const rows = [["pos", "offerta", "materia_luce", "materia_gas", "fisso_luce", "fisso_gas", "costo_annuo", "risparmio"]];
