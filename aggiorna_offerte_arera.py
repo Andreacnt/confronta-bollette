@@ -14,6 +14,7 @@ BASE = "https://www.ilportaleofferte.it/portaleOfferte/resources/opendata/csv/of
 STORICI = "https://www.ilportaleofferte.it/portaleOfferte/resources/cms/documents/5d6f1085b4d5f20821af55764e647671.csv"
 NS = {"n": "http://www.acquirenteunico.it/schemas/SII_AU/OffertaRetail/01"}
 UM_ENERGIA = {"E": "03", "G": "04"}
+FASCIA_MAP = {"01": ("f1",), "02": ("f2",), "03": ("f3",), "91": ("f2", "f3"), "07": ("f1",), "08": ("f2", "f3")}
 TIMEOUT = 120
 
 
@@ -121,15 +122,21 @@ def parse_xml(path: Path, commodity: str) -> tuple[list[dict], int]:
             "senza_deposito": senza_deposito(det.findtext("n:GARANZIE", namespaces=NS)),
             "verde_nome": bool(VERDE_RE.search(nome)),
         }
-        fasce = sorted(energia)
-        if commodity == "E" and len(fasce) > 1:
+        mappati: dict[str, float] = {}
+        for codice, prezzo in energia.items():
+            for chiave in FASCIA_MAP.get(codice, ()):
+                mappati.setdefault(chiave, prezzo)
+        if not mappati:
+            continue
+        if commodity == "E" and ("f2" in mappati or "f3" in mappati):
             rec["fascia"] = "fasce"
-            for codice, chiave in (("01", "f1"), ("02", "f2"), ("03", "f3")):
-                rec[chiave] = round(energia.get(codice, 0.0), 6)
-            rec["prezzo_kwh"] = round(sum(energia.get(c, 0.0) for c in ("01", "02", "03")) / 3, 6)
+            rec["f1"] = round(mappati.get("f1", mappati.get("f2", 0.0)), 6)
+            rec["f2"] = round(mappati.get("f2", rec["f1"]), 6)
+            rec["f3"] = round(mappati.get("f3", rec["f2"]), 6)
+            rec["prezzo_kwh"] = round((rec["f1"] + rec["f2"] + rec["f3"]) / 3, 6)
         else:
             rec["fascia"] = "mono"
-            rec["prezzo_kwh" if commodity == "E" else "prezzo_smc"] = round(energia[fasce[0]], 6)
+            rec["prezzo_kwh" if commodity == "E" else "prezzo_smc"] = round(next(iter(mappati.values()), 0.0), 6)
         offerte.append(rec)
     return offerte, scadute
 

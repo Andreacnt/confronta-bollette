@@ -659,9 +659,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1666,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.055533
+   "f2": 0.1612,
+   "f3": 0.1612,
+   "prezzo_kwh": 0.163
   },
   {
    "venditore": "a2a.it",
@@ -675,9 +675,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1686,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.0562
+   "f2": 0.1633,
+   "f3": 0.1633,
+   "prezzo_kwh": 0.165067
   },
   {
    "venditore": "a2a.it",
@@ -793,9 +793,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1728,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.0576
+   "f2": 0.1672,
+   "f3": 0.1672,
+   "prezzo_kwh": 0.169067
   },
   {
    "venditore": "a2a.it",
@@ -823,9 +823,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1728,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.0576
+   "f2": 0.1672,
+   "f3": 0.1672,
+   "prezzo_kwh": 0.169067
   },
   {
    "venditore": "a2a.it",
@@ -839,9 +839,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1857,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.0619
+   "f2": 0.1803,
+   "f3": 0.1803,
+   "prezzo_kwh": 0.1821
   },
   {
    "venditore": "a2a.it",
@@ -868,9 +868,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1728,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.0576
+   "f2": 0.1672,
+   "f3": 0.1672,
+   "prezzo_kwh": 0.169067
   },
   {
    "venditore": "a2a.it",
@@ -923,9 +923,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1728,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.0576
+   "f2": 0.1672,
+   "f3": 0.1672,
+   "prezzo_kwh": 0.169067
   },
   {
    "venditore": "a2a.it",
@@ -1534,9 +1534,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.148,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.049333
+   "f2": 0.144,
+   "f3": 0.144,
+   "prezzo_kwh": 0.145333
   },
   {
    "venditore": "accendilucegas.it",
@@ -1550,9 +1550,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.148,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.049333
+   "f2": 0.144,
+   "f3": 0.144,
+   "prezzo_kwh": 0.145333
   },
   {
    "venditore": "accendilucegas.it",
@@ -3017,13 +3017,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.137455,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.134155,
-   "spread_kwh": 0.00165,
+   "f2": 0.137455,
+   "f3": 0.137455,
+   "prezzo_kwh": 0.137455,
+   "spread_kwh": 0.00495,
    "spread_f1": 0.00495,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.00495,
+   "spread_f3": 0.00495
   },
   {
    "venditore": "asmset.ro.it",
@@ -3078,13 +3078,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.140535,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.135182,
-   "spread_kwh": 0.002677,
+   "f2": 0.140535,
+   "f3": 0.140535,
+   "prezzo_kwh": 0.140535,
+   "spread_kwh": 0.00803,
    "spread_f1": 0.00803,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.00803,
+   "spread_f3": 0.00803
   },
   {
    "venditore": "asmset.ro.it",
@@ -3098,13 +3098,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.140535,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.135182,
-   "spread_kwh": 0.002677,
+   "f2": 0.140535,
+   "f3": 0.140535,
+   "prezzo_kwh": 0.140535,
+   "spread_kwh": 0.00803,
    "spread_f1": 0.00803,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.00803,
+   "spread_f3": 0.00803
   },
   {
    "venditore": "asmset.ro.it",
@@ -3132,9 +3132,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.17589,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.05863
+   "f2": 0.16687,
+   "f3": 0.16687,
+   "prezzo_kwh": 0.169877
   },
   {
    "venditore": "asmvenditaeservizi.it",
@@ -3270,13 +3270,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.177505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.147505,
-   "spread_kwh": 0.015,
+   "f2": 0.177505,
+   "f3": 0.177505,
+   "prezzo_kwh": 0.177505,
+   "spread_kwh": 0.045,
    "spread_f1": 0.045,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.045,
+   "spread_f3": 0.045
   },
   {
    "venditore": "asteaenergia.it",
@@ -3344,13 +3344,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.177505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.147505,
-   "spread_kwh": 0.015,
+   "f2": 0.177505,
+   "f3": 0.177505,
+   "prezzo_kwh": 0.177505,
+   "spread_kwh": 0.045,
    "spread_f1": 0.045,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.045,
+   "spread_f3": 0.045
   },
   {
    "venditore": "atenalucegas.it",
@@ -3575,9 +3575,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.169,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.056333
+   "f2": 0.139,
+   "f3": 0.139,
+   "prezzo_kwh": 0.149
   },
   {
    "venditore": "atspower.it",
@@ -5375,13 +5375,13 @@
    "verde_nome": true,
    "fascia": "fasce",
    "f1": 0.150505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.138505,
-   "spread_kwh": 0.006,
+   "f2": 0.150505,
+   "f3": 0.150505,
+   "prezzo_kwh": 0.150505,
+   "spread_kwh": 0.018,
    "spread_f1": 0.018,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.018,
+   "spread_f3": 0.018
   },
   {
    "venditore": "asmenergia.com",
@@ -5415,13 +5415,13 @@
    "verde_nome": true,
    "fascia": "fasce",
    "f1": 0.150505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.138505,
-   "spread_kwh": 0.006,
+   "f2": 0.150505,
+   "f3": 0.150505,
+   "prezzo_kwh": 0.150505,
+   "spread_kwh": 0.018,
    "spread_f1": 0.018,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.018,
+   "spread_f3": 0.018
   },
   {
    "venditore": "3zinnen-energy.it",
@@ -5814,13 +5814,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.146695,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.137235,
-   "spread_kwh": 0.00473,
+   "f2": 0.146695,
+   "f3": 0.146695,
+   "prezzo_kwh": 0.146695,
+   "spread_kwh": 0.01419,
    "spread_f1": 0.01419,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.01419,
+   "spread_f3": 0.01419
   },
   {
    "venditore": "blueluceegas.it",
@@ -5834,13 +5834,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.14672,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.137243,
-   "spread_kwh": 0.004738,
+   "f2": 0.14672,
+   "f3": 0.14672,
+   "prezzo_kwh": 0.14672,
+   "spread_kwh": 0.014215,
    "spread_f1": 0.014215,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.014215,
+   "spread_f3": 0.014215
   },
   {
    "venditore": "bluenergygroup.it",
@@ -6685,13 +6685,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.142505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.135838,
-   "spread_kwh": 0.003333,
+   "f2": 0.142505,
+   "f3": 0.142505,
+   "prezzo_kwh": 0.142505,
+   "spread_kwh": 0.01,
    "spread_f1": 0.01,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.01,
+   "spread_f3": 0.01
   },
   {
    "venditore": "coimepaservizi.it",
@@ -6705,13 +6705,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.160485,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.141832,
-   "spread_kwh": 0.009327,
+   "f2": 0.160485,
+   "f3": 0.160485,
+   "prezzo_kwh": 0.160485,
+   "spread_kwh": 0.02798,
    "spread_f1": 0.02798,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.02798,
+   "spread_f3": 0.02798
   },
   {
    "venditore": "coimepaservizi.it",
@@ -6725,13 +6725,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.162405,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.142472,
-   "spread_kwh": 0.009967,
+   "f2": 0.162405,
+   "f3": 0.162405,
+   "prezzo_kwh": 0.162405,
+   "spread_kwh": 0.0299,
    "spread_f1": 0.0299,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0299,
+   "spread_f3": 0.0299
   },
   {
    "venditore": "coimepaservizi.it",
@@ -6745,13 +6745,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.160485,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.141832,
-   "spread_kwh": 0.009327,
+   "f2": 0.160485,
+   "f3": 0.160485,
+   "prezzo_kwh": 0.160485,
+   "spread_kwh": 0.02798,
    "spread_f1": 0.02798,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.02798,
+   "spread_f3": 0.02798
   },
   {
    "venditore": "coimepaservizi.it",
@@ -6765,13 +6765,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.157205,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.140738,
-   "spread_kwh": 0.008233,
+   "f2": 0.157205,
+   "f3": 0.157205,
+   "prezzo_kwh": 0.157205,
+   "spread_kwh": 0.0247,
    "spread_f1": 0.0247,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0247,
+   "spread_f3": 0.0247
   },
   {
    "venditore": "efficienzaenergia.it",
@@ -6865,13 +6865,13 @@
    "verde_nome": true,
    "fascia": "fasce",
    "f1": 0.152505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.139172,
-   "spread_kwh": 0.006667,
+   "f2": 0.152505,
+   "f3": 0.152505,
+   "prezzo_kwh": 0.152505,
+   "spread_kwh": 0.02,
    "spread_f1": 0.02,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.02,
+   "spread_f3": 0.02
   },
   {
    "venditore": "cvaenergie.it",
@@ -7044,13 +7044,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.138005,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.134338,
-   "spread_kwh": 0.001833,
+   "f2": 0.138005,
+   "f3": 0.138005,
+   "prezzo_kwh": 0.138005,
+   "spread_kwh": 0.0055,
    "spread_f1": 0.0055,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0055,
+   "spread_f3": 0.0055
   },
   {
    "venditore": "cogemeenergia.it",
@@ -7260,13 +7260,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.162505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.142505,
-   "spread_kwh": 0.01,
+   "f2": 0.162505,
+   "f3": 0.162505,
+   "prezzo_kwh": 0.162505,
+   "spread_kwh": 0.03,
    "spread_f1": 0.03,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.03,
+   "spread_f3": 0.03
   },
   {
    "venditore": "craienergy.it",
@@ -7460,13 +7460,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.157505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.140838,
-   "spread_kwh": 0.008333,
+   "f2": 0.157505,
+   "f3": 0.157505,
+   "prezzo_kwh": 0.157505,
+   "spread_kwh": 0.025,
    "spread_f1": 0.025,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.025,
+   "spread_f3": 0.025
   },
   {
    "venditore": "dolomitienergia.it",
@@ -7480,9 +7480,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.172,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.057333
+   "f2": 0.148,
+   "f3": 0.148,
+   "prezzo_kwh": 0.156
   },
   {
    "venditore": "dolomitienergia.it",
@@ -7496,13 +7496,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.142505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.135838,
-   "spread_kwh": 0.003333,
+   "f2": 0.142505,
+   "f3": 0.142505,
+   "prezzo_kwh": 0.142505,
+   "spread_kwh": 0.01,
    "spread_f1": 0.01,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.01,
+   "spread_f3": 0.01
   },
   {
    "venditore": "dolomitienergia.it",
@@ -7575,13 +7575,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.142505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.135838,
-   "spread_kwh": 0.003333,
+   "f2": 0.142505,
+   "f3": 0.142505,
+   "prezzo_kwh": 0.142505,
+   "spread_kwh": 0.01,
    "spread_f1": 0.01,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.01,
+   "spread_f3": 0.01
   },
   {
    "venditore": "dolomitienergia.it",
@@ -7621,9 +7621,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1913,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.063767
+   "f2": 0.1654,
+   "f3": 0.1654,
+   "prezzo_kwh": 0.174033
   },
   {
    "venditore": "dominoenergia.it",
@@ -8448,9 +8448,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1929,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.0643
+   "f2": 0.1893,
+   "f3": 0.1893,
+   "prezzo_kwh": 0.1905
   },
   {
    "venditore": "eon-energia.com",
@@ -8464,9 +8464,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.208,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.069333
+   "f2": 0.2044,
+   "f3": 0.2044,
+   "prezzo_kwh": 0.2056
   },
   {
    "venditore": "eon-energia.com",
@@ -8624,9 +8624,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1662,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.0554
+   "f2": 0.1583,
+   "f3": 0.1583,
+   "prezzo_kwh": 0.160933
   },
   {
    "venditore": "eon-energia.com",
@@ -8686,9 +8686,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1558,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.051933
+   "f2": 0.1478,
+   "f3": 0.1478,
+   "prezzo_kwh": 0.150467
   },
   {
    "venditore": "eon-energia.com",
@@ -8702,9 +8702,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1467,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.0489
+   "f2": 0.1431,
+   "f3": 0.1431,
+   "prezzo_kwh": 0.1443
   },
   {
    "venditore": "eon-energia.com",
@@ -9310,13 +9310,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.198505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.154505,
-   "spread_kwh": 0.022,
+   "f2": 0.198505,
+   "f3": 0.198505,
+   "prezzo_kwh": 0.198505,
+   "spread_kwh": 0.066,
    "spread_f1": 0.066,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.066,
+   "spread_f3": 0.066
   },
   {
    "venditore": "e3energy.it",
@@ -11571,13 +11571,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.140535,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.135182,
-   "spread_kwh": 0.002677,
+   "f2": 0.140535,
+   "f3": 0.140535,
+   "prezzo_kwh": 0.140535,
+   "spread_kwh": 0.00803,
    "spread_f1": 0.00803,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.00803,
+   "spread_f3": 0.00803
   },
   {
    "venditore": "etraenergia.it",
@@ -11591,13 +11591,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.140535,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.135182,
-   "spread_kwh": 0.002677,
+   "f2": 0.140535,
+   "f3": 0.140535,
+   "prezzo_kwh": 0.140535,
+   "spread_kwh": 0.00803,
    "spread_f1": 0.00803,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.00803,
+   "spread_f3": 0.00803
   },
   {
    "venditore": "etraenergia.it",
@@ -11625,9 +11625,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.17589,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.05863
+   "f2": 0.16687,
+   "f3": 0.16687,
+   "prezzo_kwh": 0.169877
   },
   {
    "venditore": "etraenergia.it",
@@ -11788,13 +11788,13 @@
    "verde_nome": true,
    "fascia": "fasce",
    "f1": 0.177495,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.147502,
-   "spread_kwh": 0.014997,
+   "f2": 0.177495,
+   "f3": 0.177495,
+   "prezzo_kwh": 0.177495,
+   "spread_kwh": 0.04499,
    "spread_f1": 0.04499,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.04499,
+   "spread_f3": 0.04499
   },
   {
    "venditore": "eviso.it",
@@ -11808,13 +11808,13 @@
    "verde_nome": true,
    "fascia": "fasce",
    "f1": 0.162502,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.142504,
-   "spread_kwh": 0.009999,
+   "f2": 0.162502,
+   "f3": 0.162502,
+   "prezzo_kwh": 0.162502,
+   "spread_kwh": 0.029997,
    "spread_f1": 0.029997,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.029997,
+   "spread_f3": 0.029997
   },
   {
    "venditore": "eviso.it",
@@ -11841,13 +11841,13 @@
    "verde_nome": true,
    "fascia": "fasce",
    "f1": 0.142504,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.135838,
-   "spread_kwh": 0.003333,
+   "f2": 0.142504,
+   "f3": 0.142504,
+   "prezzo_kwh": 0.142504,
+   "spread_kwh": 0.009999,
    "spread_f1": 0.009999,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.009999,
+   "spread_f3": 0.009999
   },
   {
    "venditore": "evogasepower.it",
@@ -11995,9 +11995,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.117,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.039
+   "f2": 0.114,
+   "f3": 0.114,
+   "prezzo_kwh": 0.115
   },
   {
    "venditore": "edisonenergia.it",
@@ -12077,9 +12077,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1991,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.066367
+   "f2": 0.1941,
+   "f3": 0.1941,
+   "prezzo_kwh": 0.195767
   },
   {
    "venditore": "edisonenergia.it",
@@ -12107,9 +12107,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.2125,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.070833
+   "f2": 0.2087,
+   "f3": 0.2087,
+   "prezzo_kwh": 0.209967
   },
   {
    "venditore": "edisonenergia.it",
@@ -12137,9 +12137,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.163,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.054333
+   "f2": 0.158,
+   "f3": 0.158,
+   "prezzo_kwh": 0.159667
   },
   {
    "venditore": "egogreen.it",
@@ -13457,9 +13457,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1778,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.059267
+   "f2": 0.1681,
+   "f3": 0.1681,
+   "prezzo_kwh": 0.171333
   },
   {
    "venditore": "eniplenitude.com",
@@ -13473,9 +13473,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.2196,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.0732
+   "f2": 0.2116,
+   "f3": 0.2116,
+   "prezzo_kwh": 0.214267
   },
   {
    "venditore": "eniplenitude.com",
@@ -13502,13 +13502,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.154505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.139838,
-   "spread_kwh": 0.007333,
+   "f2": 0.154505,
+   "f3": 0.154505,
+   "prezzo_kwh": 0.154505,
+   "spread_kwh": 0.022,
    "spread_f1": 0.022,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.022,
+   "spread_f3": 0.022
   },
   {
    "venditore": "eniplenitude.com",
@@ -13549,13 +13549,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.154505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.139838,
-   "spread_kwh": 0.007333,
+   "f2": 0.154505,
+   "f3": 0.154505,
+   "prezzo_kwh": 0.154505,
+   "spread_kwh": 0.022,
    "spread_f1": 0.022,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.022,
+   "spread_f3": 0.022
   },
   {
    "venditore": "eniplenitude.com",
@@ -13569,13 +13569,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.154505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.139838,
-   "spread_kwh": 0.007333,
+   "f2": 0.154505,
+   "f3": 0.154505,
+   "prezzo_kwh": 0.154505,
+   "spread_kwh": 0.022,
    "spread_f1": 0.022,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.022,
+   "spread_f3": 0.022
   },
   {
    "venditore": "eniplenitude.com",
@@ -13717,13 +13717,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.166275,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.143762,
-   "spread_kwh": 0.011257,
+   "f2": 0.166275,
+   "f3": 0.166275,
+   "prezzo_kwh": 0.166275,
+   "spread_kwh": 0.03377,
    "spread_f1": 0.03377,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.03377,
+   "spread_f3": 0.03377
   },
   {
    "venditore": "estenergy.gruppohera.it",
@@ -13770,9 +13770,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.16445,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.054817
+   "f2": 0.15653,
+   "f3": 0.15653,
+   "prezzo_kwh": 0.15917
   },
   {
    "venditore": "estenergy.gruppohera.it",
@@ -13865,9 +13865,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.16445,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.054817
+   "f2": 0.15653,
+   "f3": 0.15653,
+   "prezzo_kwh": 0.15917
   },
   {
    "venditore": "estenergy.gruppohera.it",
@@ -13881,9 +13881,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.17589,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.05863
+   "f2": 0.16687,
+   "f3": 0.16687,
+   "prezzo_kwh": 0.169877
   },
   {
    "venditore": "estra.it",
@@ -14513,13 +14513,13 @@
    "verde_nome": true,
    "fascia": "fasce",
    "f1": 0.138005,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.134338,
-   "spread_kwh": 0.001833,
+   "f2": 0.138005,
+   "f3": 0.138005,
+   "prezzo_kwh": 0.138005,
+   "spread_kwh": 0.0055,
    "spread_f1": 0.0055,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0055,
+   "spread_f3": 0.0055
   },
   {
    "venditore": "forgreen.it",
@@ -14533,13 +14533,13 @@
    "verde_nome": true,
    "fascia": "fasce",
    "f1": 0.149005,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.138005,
-   "spread_kwh": 0.0055,
+   "f2": 0.149005,
+   "f3": 0.149005,
+   "prezzo_kwh": 0.149005,
+   "spread_kwh": 0.0165,
    "spread_f1": 0.0165,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0165,
+   "spread_f3": 0.0165
   },
   {
    "venditore": "forgreen.it",
@@ -14553,13 +14553,13 @@
    "verde_nome": true,
    "fascia": "fasce",
    "f1": 0.144605,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.136538,
-   "spread_kwh": 0.004033,
+   "f2": 0.144605,
+   "f3": 0.144605,
+   "prezzo_kwh": 0.144605,
+   "spread_kwh": 0.0121,
    "spread_f1": 0.0121,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0121,
+   "spread_f3": 0.0121
   },
   {
    "venditore": "frisbienergia.it",
@@ -15250,13 +15250,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.151205,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.138738,
-   "spread_kwh": 0.006233,
+   "f2": 0.151205,
+   "f3": 0.151205,
+   "prezzo_kwh": 0.151205,
+   "spread_kwh": 0.0187,
    "spread_f1": 0.0187,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0187,
+   "spread_f3": 0.0187
   },
   {
    "venditore": "gekospa.it",
@@ -15298,13 +15298,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.151205,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.138738,
-   "spread_kwh": 0.006233,
+   "f2": 0.151205,
+   "f3": 0.151205,
+   "prezzo_kwh": 0.151205,
+   "spread_kwh": 0.0187,
    "spread_f1": 0.0187,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0187,
+   "spread_f3": 0.0187
   },
   {
    "venditore": "gelsia.it",
@@ -15358,9 +15358,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.1693,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.056433
+   "f2": 0.1642,
+   "f3": 0.1642,
+   "prezzo_kwh": 0.1659
   },
   {
    "venditore": "gelsia.it",
@@ -16214,9 +16214,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.16445,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.054817
+   "f2": 0.15653,
+   "f3": 0.15653,
+   "prezzo_kwh": 0.15917
   },
   {
    "venditore": "heracomm.gruppohera.it",
@@ -16230,13 +16230,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.166275,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.143762,
-   "spread_kwh": 0.011257,
+   "f2": 0.166275,
+   "f3": 0.166275,
+   "prezzo_kwh": 0.166275,
+   "spread_kwh": 0.03377,
    "spread_f1": 0.03377,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.03377,
+   "spread_f3": 0.03377
   },
   {
    "venditore": "heracomm.gruppohera.it",
@@ -16270,9 +16270,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.17589,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.05863
+   "f2": 0.16687,
+   "f3": 0.16687,
+   "prezzo_kwh": 0.169877
   },
   {
    "venditore": "heracomm.gruppohera.it",
@@ -16286,9 +16286,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.16445,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.054817
+   "f2": 0.15653,
+   "f3": 0.15653,
+   "prezzo_kwh": 0.15917
   },
   {
    "venditore": "heracomm.gruppohera.it",
@@ -16583,13 +16583,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.147509,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.137506,
-   "spread_kwh": 0.005001,
+   "f2": 0.147509,
+   "f3": 0.147509,
+   "prezzo_kwh": 0.147509,
+   "spread_kwh": 0.015004,
    "spread_f1": 0.015004,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.015004,
+   "spread_f3": 0.015004
   },
   {
    "venditore": "illumia.it",
@@ -16677,13 +16677,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.157508,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.140839,
-   "spread_kwh": 0.008334,
+   "f2": 0.157508,
+   "f3": 0.157508,
+   "prezzo_kwh": 0.157508,
+   "spread_kwh": 0.025003,
    "spread_f1": 0.025003,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.025003,
+   "spread_f3": 0.025003
   },
   {
    "venditore": "incaricalucegas.it",
@@ -19632,13 +19632,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.149005,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.138005,
-   "spread_kwh": 0.0055,
+   "f2": 0.149005,
+   "f3": 0.149005,
+   "prezzo_kwh": 0.149005,
+   "spread_kwh": 0.0165,
    "spread_f1": 0.0165,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0165,
+   "spread_f3": 0.0165
   },
   {
    "venditore": "magisenergia.it",
@@ -19665,13 +19665,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.138005,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.134338,
-   "spread_kwh": 0.001833,
+   "f2": 0.138005,
+   "f3": 0.138005,
+   "prezzo_kwh": 0.138005,
+   "spread_kwh": 0.0055,
    "spread_f1": 0.0055,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0055,
+   "spread_f3": 0.0055
   },
   {
    "venditore": "magisenergia.it",
@@ -19685,13 +19685,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.165505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.143505,
-   "spread_kwh": 0.011,
+   "f2": 0.165505,
+   "f3": 0.165505,
+   "prezzo_kwh": 0.165505,
+   "spread_kwh": 0.033,
    "spread_f1": 0.033,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.033,
+   "spread_f3": 0.033
   },
   {
    "venditore": "magisenergia.it",
@@ -19879,9 +19879,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.18304,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.061013
+   "f2": 0.17105,
+   "f3": 0.17105,
+   "prezzo_kwh": 0.175047
   },
   {
    "venditore": "enerwebcoop.it",
@@ -19922,9 +19922,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.23785,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.079283
+   "f2": 0.23014,
+   "f3": 0.23014,
+   "prezzo_kwh": 0.23271
   },
   {
    "venditore": "nrgcompany.it",
@@ -20123,14 +20123,14 @@
    "senza_deposito": true,
    "verde_nome": false,
    "fascia": "fasce",
-   "f1": 0.132505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.132505,
-   "spread_kwh": 0.0,
-   "spread_f1": 0.0,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "f1": 0.156705,
+   "f2": 0.156705,
+   "f3": 0.156705,
+   "prezzo_kwh": 0.156705,
+   "spread_kwh": 0.0242,
+   "spread_f1": 0.0242,
+   "spread_f2": 0.0242,
+   "spread_f3": 0.0242
   },
   {
    "venditore": "noienergetic.it",
@@ -20305,14 +20305,14 @@
    "senza_deposito": true,
    "verde_nome": false,
    "fascia": "fasce",
-   "f1": 0.132505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.132505,
-   "spread_kwh": 0.0,
-   "spread_f1": 0.0,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "f1": 0.156705,
+   "f2": 0.156705,
+   "f3": 0.156705,
+   "prezzo_kwh": 0.156705,
+   "spread_kwh": 0.0242,
+   "spread_f1": 0.0242,
+   "spread_f2": 0.0242,
+   "spread_f3": 0.0242
   },
   {
    "venditore": "noienergetic.it",
@@ -20339,14 +20339,14 @@
    "senza_deposito": true,
    "verde_nome": false,
    "fascia": "fasce",
-   "f1": 0.132505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.132505,
-   "spread_kwh": 0.0,
-   "spread_f1": 0.0,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "f1": 0.156705,
+   "f2": 0.156705,
+   "f3": 0.156705,
+   "prezzo_kwh": 0.156705,
+   "spread_kwh": 0.0242,
+   "spread_f1": 0.0242,
+   "spread_f2": 0.0242,
+   "spread_f3": 0.0242
   },
   {
    "venditore": "noienergetic.it",
@@ -20379,14 +20379,14 @@
    "senza_deposito": false,
    "verde_nome": false,
    "fascia": "fasce",
-   "f1": 0.132505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.132505,
-   "spread_kwh": 0.0,
-   "spread_f1": 0.0,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "f1": 0.197894,
+   "f2": 0.197894,
+   "f3": 0.197894,
+   "prezzo_kwh": 0.197894,
+   "spread_kwh": 0.065389,
+   "spread_f1": 0.065389,
+   "spread_f2": 0.065389,
+   "spread_f3": 0.065389
   },
   {
    "venditore": "noienergia.com",
@@ -22007,13 +22007,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.157805,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.140938,
-   "spread_kwh": 0.008433,
+   "f2": 0.157805,
+   "f3": 0.157805,
+   "prezzo_kwh": 0.157805,
+   "spread_kwh": 0.0253,
    "spread_f1": 0.0253,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0253,
+   "spread_f3": 0.0253
   },
   {
    "venditore": "piemonteenergy.it",
@@ -22027,13 +22027,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.157805,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.140938,
-   "spread_kwh": 0.008433,
+   "f2": 0.157805,
+   "f3": 0.157805,
+   "prezzo_kwh": 0.157805,
+   "spread_kwh": 0.0253,
    "spread_f1": 0.0253,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0253,
+   "spread_f3": 0.0253
   },
   {
    "venditore": "platinume.it",
@@ -22424,9 +22424,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.16596,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.05532
+   "f2": 0.16085,
+   "f3": 0.16085,
+   "prezzo_kwh": 0.162553
   },
   {
    "venditore": "pulsee.it",
@@ -22778,9 +22778,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.19892,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.066307
+   "f2": 0.19379,
+   "f3": 0.19379,
+   "prezzo_kwh": 0.1955
   },
   {
    "venditore": "pulsee.it",
@@ -22794,9 +22794,9 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.20149,
-   "f2": 0.0,
-   "f3": 0.0,
-   "prezzo_kwh": 0.067163
+   "f2": 0.19636,
+   "f3": 0.19636,
+   "prezzo_kwh": 0.19807
   },
   {
    "venditore": "pulsee.it",
@@ -25346,13 +25346,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.177505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.147505,
-   "spread_kwh": 0.015,
+   "f2": 0.177505,
+   "f3": 0.177505,
+   "prezzo_kwh": 0.177505,
+   "spread_kwh": 0.045,
    "spread_f1": 0.045,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.045,
+   "spread_f3": 0.045
   },
   {
    "venditore": "sgrservizi.it",
@@ -25400,13 +25400,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.177505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.147505,
-   "spread_kwh": 0.015,
+   "f2": 0.177505,
+   "f3": 0.177505,
+   "prezzo_kwh": 0.177505,
+   "spread_kwh": 0.045,
    "spread_f1": 0.045,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.045,
+   "spread_f3": 0.045
   },
   {
    "venditore": "sienergysrl.it",
@@ -25625,13 +25625,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.154395,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.139802,
-   "spread_kwh": 0.007297,
+   "f2": 0.154395,
+   "f3": 0.154395,
+   "prezzo_kwh": 0.154395,
+   "spread_kwh": 0.02189,
    "spread_f1": 0.02189,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.02189,
+   "spread_f3": 0.02189
   },
   {
    "venditore": "sinergas.it",
@@ -25685,13 +25685,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.146695,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.137235,
-   "spread_kwh": 0.00473,
+   "f2": 0.146695,
+   "f3": 0.146695,
+   "prezzo_kwh": 0.146695,
+   "spread_kwh": 0.01419,
    "spread_f1": 0.01419,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.01419,
+   "spread_f3": 0.01419
   },
   {
    "venditore": "sinergas.it",
@@ -25705,13 +25705,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.146695,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.137235,
-   "spread_kwh": 0.00473,
+   "f2": 0.146695,
+   "f3": 0.146695,
+   "prezzo_kwh": 0.146695,
+   "spread_kwh": 0.01419,
    "spread_f1": 0.01419,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.01419,
+   "spread_f3": 0.01419
   },
   {
    "venditore": "sinergas.it",
@@ -25725,13 +25725,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.156595,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.140535,
-   "spread_kwh": 0.00803,
+   "f2": 0.156595,
+   "f3": 0.156595,
+   "prezzo_kwh": 0.156595,
+   "spread_kwh": 0.02409,
    "spread_f1": 0.02409,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.02409,
+   "spread_f3": 0.02409
   },
   {
    "venditore": "sinergas.it",
@@ -25758,13 +25758,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.146695,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.137235,
-   "spread_kwh": 0.00473,
+   "f2": 0.146695,
+   "f3": 0.146695,
+   "prezzo_kwh": 0.146695,
+   "spread_kwh": 0.01419,
    "spread_f1": 0.01419,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.01419,
+   "spread_f3": 0.01419
   },
   {
    "venditore": "elettricaenergia.it",
@@ -25998,13 +25998,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.177505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.147505,
-   "spread_kwh": 0.015,
+   "f2": 0.177505,
+   "f3": 0.177505,
+   "prezzo_kwh": 0.177505,
+   "spread_kwh": 0.045,
    "spread_f1": 0.045,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.045,
+   "spread_f3": 0.045
   },
   {
    "venditore": "solgasonline.it",
@@ -26032,13 +26032,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.177505,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.147505,
-   "spread_kwh": 0.015,
+   "f2": 0.177505,
+   "f3": 0.177505,
+   "prezzo_kwh": 0.177505,
+   "spread_kwh": 0.045,
    "spread_f1": 0.045,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.045,
+   "spread_f3": 0.045
   },
   {
    "venditore": "recenergy.it",
@@ -28409,13 +28409,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.169975,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.144995,
-   "spread_kwh": 0.01249,
+   "f2": 0.169975,
+   "f3": 0.169975,
+   "prezzo_kwh": 0.169975,
+   "spread_kwh": 0.03747,
    "spread_f1": 0.03747,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.03747,
+   "spread_f3": 0.03747
   },
   {
    "venditore": "teaenergia.it",
@@ -28429,13 +28429,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.163135,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.142715,
-   "spread_kwh": 0.01021,
+   "f2": 0.162935,
+   "f3": 0.162935,
+   "prezzo_kwh": 0.163002,
+   "spread_kwh": 0.030497,
    "spread_f1": 0.03063,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.03043,
+   "spread_f3": 0.03043
   },
   {
    "venditore": "teaenergia.it",
@@ -28449,13 +28449,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.215005,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.160005,
-   "spread_kwh": 0.0275,
+   "f2": 0.215005,
+   "f3": 0.215005,
+   "prezzo_kwh": 0.215005,
+   "spread_kwh": 0.0825,
    "spread_f1": 0.0825,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.0825,
+   "spread_f3": 0.0825
   },
   {
    "venditore": "teaenergia.it",
@@ -28543,13 +28543,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.169975,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.144995,
-   "spread_kwh": 0.01249,
+   "f2": 0.169975,
+   "f3": 0.169975,
+   "prezzo_kwh": 0.169975,
+   "spread_kwh": 0.03747,
    "spread_f1": 0.03747,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.03747,
+   "spread_f3": 0.03747
   },
   {
    "venditore": "teaenergia.it",
@@ -28690,13 +28690,13 @@
    "verde_nome": false,
    "fascia": "fasce",
    "f1": 0.14185,
-   "f2": 0.132505,
-   "f3": 0.132505,
-   "prezzo_kwh": 0.13562,
-   "spread_kwh": 0.003115,
+   "f2": 0.14185,
+   "f3": 0.14185,
+   "prezzo_kwh": 0.14185,
+   "spread_kwh": 0.009345,
    "spread_f1": 0.009345,
-   "spread_f2": 0.0,
-   "spread_f3": 0.0
+   "spread_f2": 0.009345,
+   "spread_f3": 0.009345
   },
   {
    "venditore": "themaenergia.it",
