@@ -1,0 +1,7 @@
+__pycache__/
+.tmp_arera/
+report.csv
+bollette/*.pdf
+arera_data.js
+manuale.csv
+ricerca.json

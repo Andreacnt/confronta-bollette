@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confronta Bollette Luce &amp; Gas</title>
+<style>
+:root{color-scheme:dark;--bg:#0f141b;--card:#182030;--line:#2a3445;--txt:#e8edf5;--mut:#9aa7bd;--acc:#4cc38a;--warn:#ffb454}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.55 system-ui,Segoe UI,Roboto,sans-serif}
+header{padding:24px 20px 8px;max-width:900px;margin:auto}h1{font-size:24px;margin:0 0 4px}p.sub{color:var(--mut);margin:0}
+main{max-width:900px;margin:auto;padding:12px 20px 60px;display:grid;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+h2{font-size:17px;margin:0 0 8px}.step{display:inline-block;background:#1f6f50;border-radius:99px;font-size:13px;padding:2px 12px;margin-right:8px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin-top:8px}
+label{display:grid;gap:4px;font-size:13px;color:var(--mut)}input,select,button{font:inherit;color:var(--txt);background:#0c1119;border:1px solid var(--line);border-radius:8px;padding:9px 12px}
+button{cursor:pointer;background:#1f6f50;border-color:#1f6f50;font-weight:600}button.ghost{background:transparent;font-weight:400}
+button.big{font-size:18px;padding:12px 28px}table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600}.best{color:var(--acc);font-weight:700}.mut{color:var(--mut);font-size:13px}
+.pill{display:inline-block;padding:2px 8px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:var(--mut)}
+.warn{color:var(--warn)}#alert{border-color:var(--warn)}
+#verdetto{font-size:17px;background:#0c1119;border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:8px}
+details{margin-top:10px}summary{cursor:pointer;color:var(--mut)}
+label:has(input[type=checkbox]){grid-template-columns:auto 1fr;align-items:center;color:var(--txt)}
+@media(max-width:700px){table{font-size:13px}.row{gap:8px}th.opt,td.opt{display:none}}
+@media print{body{background:#fff;color:#000;font-size:12px}header{padding:8px}main{padding:0;max-width:100%}.card{border:1px solid #999;break-inside:avoid}button,input,select,summary,.pill{display:none!important}#verdetto{border:1px solid #999}.best{color:#060}}
+</style>
+</head>
+<body>
+<header>
+<h1>Quanto puoi risparmiare su luce e gas?</h1>
+<p class="sub">Carica le bollette, premi un bottone e scopri l'offerta migliore tra oltre 3.000 tariffe ufficiali ARERA.</p>
+</header>
+<main>
+<div id="alert" class="card" hidden></div>
+
+<section class="card">
+<h2><span class="step">1</span>Le tue bollette</h2>
+<p class="mut" style="margin:0">I file restano sul tuo computer, non vengono inviati da nessuna parte.</p>
+<div class="row">
+<label>Bollette in PDF<input type="file" id="pdf" accept="application/pdf" multiple></label>
+<button id="demo">Usa i miei consumi salvati</button>
+<button id="reset" class="ghost">Fai una nuova ricerca</button>
+<button id="salva" class="ghost">Salva ricerca</button>
+<label>Apri ricerca salvata<input type="file" id="carica" accept="application/json"></label>
+</div>
+<details><summary>Inserimento manuale (se il PDF non si legge)</summary>
+<div class="row">
+<label>Luce o gas<input type="text" id="m-tipo" value="luce"></label>
+<label>Consumo in un anno<input type="number" id="m-consumo" value="2519"></label>
+<label>Spesa in un anno €<input type="number" id="m-spesa" value="685.09" step="0.01"></label>
+<button id="aggiungi" class="ghost">Aggiungi</button>
+</div></details>
+<p id="riepilogo" class="mut">Nessuna bolletta: carica i PDF oppure premi "Usa i miei consumi salvati".</p>
+<div id="storico"></div>
+<table id="tab-bollette" hidden><thead><tr><th>Bolletta</th><th>Luce/Gas</th><th>Consumo annuo</th><th>Spesa annua</th><th></th></tr></thead><tbody></tbody></table>
+</section>
+
+<section class="card">
+<h2><span class="step">2</span>Il risultato <span class="pill" id="stato-arera">attendi</span></h2>
+<div id="verdetto" class="mut">Qui comparirà la risposta: quale offerta ti conviene e quanto risparmi.</div>
+<div id="arera-out"></div>
+<details><summary>Opzioni (tipi di tariffa, PUN/PSV, filtri): il risultato si aggiorna da solo</summary>
+<div class="row">
+<label>Confronto<select id="utenza"><option value="dual">Luce + Gas</option><option value="luce">Solo luce</option><option value="gas">Solo gas</option></select></label>
+<label>Tariffa luce<select id="tariffa"><option value="mono">Prezzo unico</option><option value="fasce">Prezzo a fasce orarie</option></select></label>
+<label>% fascia 1<input type="number" id="p-f1" value="33" min="0" max="100"></label>
+<label>% fascia 2<input type="number" id="p-f2" value="31" min="0" max="100"></label>
+<label>% fascia 3<input type="number" id="p-f3" value="36" min="0" max="100"></label>
+<label>Quante offerte mostrare<select id="arera-top"><option>5</option><option selected>10</option><option>20</option></select></label>
+</div>
+<div class="row">
+<label>Tipo prezzo<select id="arera-tipo"><option value="tutte">Fisso + variabile</option><option value="fisso">Solo prezzo fisso</option><option value="indicizzato">Solo prezzo variabile</option></select></label>
+<label>Cerca un venditore<input type="text" id="arera-q" placeholder="es. octopus"></label>
+<label>Zona gas (per la stima)<select id="arera-ambito"><option value="a1">Nord-ovest</option><option value="a2" selected>Nord-est</option><option value="a3">Centro</option><option value="a4">Sud-est</option><option value="a5">Sud-ovest</option><option value="a6">Sud isole</option></select></label>
+<label><input type="checkbox" id="arera-nodep"> Solo senza deposito</label>
+<label><input type="checkbox" id="arera-verde"> Solo energia verde</label>
+<label><input type="checkbox" id="arera-noti"> Solo grandi fornitori</label>
+</div>
+<p class="mut">Prezzo fisso = bloccato per mesi. Prezzo variabile = segue il mercato (PUN luce, PSV gas) più una commissione.</p>
+<div class="row">
+<label>PUN luce stimato €/kWh<input type="number" id="pun" value="0.1325" step="0.001"></label>
+<label>PSV gas stimato €/Smc<input type="number" id="psv" value="0.5042" step="0.001"></label>
+<button id="csv" class="ghost">Scarica risultato (CSV)</button>
+<button id="stampa" class="ghost">Stampa risultato</button>
+</div></details>
+<details open><summary>Cosa significano questi numeri?</summary>
+<p class="mut"><b>Costo energia/anno</b> = prezzo dell'energia + quota fissa del venditore. È la parte che cambia tra offerte ed è quella giusta per confrontarle.<br>
+<b>Bolletta stimata</b> = sopra + oneri di rete, accise e IVA (parametri ufficiali ARERA). È una stima della bolletta vera.<br>
+<b>Risparmio</b> = differenza con quello che spendi oggi secondo le tue bollette.</p></details>
+<details><summary>Offerte salvate a confronto (le 9 principali)</summary>
+<div id="out" class="mut">Verrà compilata insieme al risultato.</div></details>
+</section>
+
+<section class="card">
+<h2><span class="step">3</span>Classifiche complete: luce e gas separati</h2>
+<p class="mut" style="margin:0">Qui trovi gli elenchi lunghi. Quante righe mostrare lo scegli nelle opzioni qui sopra.</p>
+<div id="arera-full"><p class="mut">Carica le bollette al punto 1 e il confronto appare da solo.</p></div>
+<details><summary>Database completo (tutte le tariffe con dettagli tecnici)</summary>
+<div id="db" class="mut">Caricamento…</div></details>
+</section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="arera_data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
