@@ -316,7 +316,7 @@ function tabellaArera(el, righe, unita, conTotale) {
       <td><b>${r.o.venditore}</b> · ${r.o.nome}<br><span class="mut">${r.o.tipo_prezzo} · ${r.o.fascia === "fasce" ? "a fasce" : "prezzo unico"}${r.o.scadenza ? " · valida fino al " + dataIt(r.o.scadenza) : ""}${avviso}${flags ? " · " + flags : ""} · <a href="${r.o.url}" target="_blank" rel="noopener">scheda e contratto</a></span></td>
       <td class="opt">€${r.p.toFixed(4)}/${unita}</td><td class="opt">€${r.o.quota_fissa_annua.toFixed(0)}</td>
       <td class="${i === 0 ? "best" : ""}">€${r.costo.toFixed(2)}</td>${conTotale ? `<td>€${r.tot.toFixed(2)}</td>` : ""}
-      <td>€${r.risp.toFixed(2)}</td>`;
+      <td>${r.risp == null ? "—" : "€" + r.risp.toFixed(2)}</td>`;
     tb.appendChild(tr);
   });
   t.appendChild(tb);
@@ -453,6 +453,41 @@ function classificaArera() {
   full.appendChild(p);
 }
 
+const PROFILI = {
+  single: { luce: 1400, gas: 400 },
+  coppia: { luce: 2000, gas: 800 },
+  famiglia: { luce: 2700, gas: 1400 },
+};
+
+function classificaMercato() {
+  const el = $("mercato-out");
+  if (!arera.luce.length && !arera.gas.length) { el.innerHTML = '<p class="mut">Dati in caricamento…</p>'; return; }
+  const pr = PROFILI[$("mercato-profilo").value] || PROFILI.famiglia;
+  const pun = num($("pun").value) ?? arera.pun_rif, psv = num($("psv").value) ?? arera.psv_rif;
+  const ft = $("arera-tipo").value, q = $("arera-q").value.trim().toLowerCase();
+  const noDep = $("arera-nodep").checked, verde = $("arera-verde").checked;
+  const noti = $("arera-noti").checked, ambito = $("arera-ambito").value || "a2";
+  const conTot = !!(arera.parametri.E && Object.keys(arera.parametri.E).length);
+  const eGrande = (o) => GRANDI.some((g) => (o.venditore || "").toLowerCase().includes(g));
+  const filtra = (o) => (ft === "tutte" || o.tipo_prezzo === ft)
+    && (!q || (o.venditore + " " + o.nome).toLowerCase().includes(q))
+    && (!noDep || o.senza_deposito) && (!verde || o.verde_nome)
+    && (!noti || eGrande(o));
+  const rank = (lista, prezzo, cons, totFn) => lista.filter(filtra)
+    .map((o) => { const p = prezzo(o); return p == null ? null : { o, p, costo: +(cons * p + o.quota_fissa_annua).toFixed(2) }; })
+    .filter(Boolean).map((r) => ({ ...r, tot: totFn ? totFn(r.p, r.o.quota_fissa_annua) : 0 }))
+    .sort((a, b) => a.costo - b.costo).slice(0, 3);
+  el.innerHTML = "";
+  const h1 = document.createElement("h2");
+  h1.textContent = `Luce (${pr.luce} kWh/anno)`;
+  el.appendChild(h1);
+  tabellaArera(el, rank(arera.luce, (o) => pkArera(o, "fasce", 33, 31, 36, pun), pr.luce, (p, qu) => totaleLuce(p, qu, pr.luce)), "kWh", conTot);
+  const h2 = document.createElement("h2");
+  h2.textContent = `Gas (${pr.gas} Smc/anno)`;
+  el.appendChild(h2);
+  tabellaArera(el, rank(arera.gas, (o) => pgArera(o, psv), pr.gas, (p, qu) => totaleGas(p, qu, pr.gas, ambito)), "Smc", conTot);
+}
+
 function mostraScadenza() {
   const a = $("alert");
   const trovate = [];
@@ -490,6 +525,7 @@ async function init() {
     if (arera.pun_rif) $("pun").value = arera.pun_rif;
     if (arera.psv_rif) $("psv").value = arera.psv_rif;
     $("stato-arera").textContent = `${arera.luce.length + arera.gas.length} offerte del ${arera.data}${fonte}`;
+    classificaMercato();
   };
   try {
     const r2 = await fetch("offerte_arera.json", { cache: "no-store" });
@@ -506,7 +542,8 @@ async function init() {
       $("stato-arera").textContent = "dati mancanti: esegui aggiorna_offerte_arera.py --inline";
     }
   }
-  const ricalcola = () => { if (bollette.length) { confronta(); classificaArera(); } };
+  const ricalcola = () => { classificaMercato(); if (bollette.length) { confronta(); classificaArera(); } };
+  $("mercato-profilo").addEventListener("change", classificaMercato);
   ["utenza", "tariffa", "p-f1", "p-f2", "p-f3", "arera-top", "arera-tipo", "arera-ambito", "pun", "psv"].forEach((id) => {
     $(id).addEventListener("change", ricalcola);
   });
