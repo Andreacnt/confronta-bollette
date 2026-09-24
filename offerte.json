@@ -1,19 +1,5 @@
 [
   {
-    "nome": "Tua attuale Octopus Fissa v113/v33",
-    "fornitore": "Octopus",
-    "tipo_prezzo": "fisso",
-    "durata_mesi": 12,
-    "aggiornato": "2026-09-04",
-    "fonte": "Box offerta nelle tue bollette (attiva dal 01/11/2025, scade 31/10/2026)",
-    "nota": "Prezzo energia 0,09 + CdispD 0,018468. Riferimento, non attivabile da nuovi clienti.",
-    "prezzo_kwh": 0.108468,
-    "fisso_luce_annuo": 72.0,
-    "prezzo_smc": 0.37,
-    "fisso_gas_annuo": 84.0,
-    "scadenza_offerta": "2026-10-31"
-  },
-  {
     "nome": "Octopus Fissa 12M set-2026",
     "fornitore": "Octopus",
     "tipo_prezzo": "fisso",

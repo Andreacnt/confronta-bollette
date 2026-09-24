@@ -2,7 +2,6 @@ const $ = (id) => document.getElementById(id);
 const offerte = [];
 const bollette = [];
 const FALLBACK = [
-  {"nome": "Tua attuale Octopus Fissa v113/v33", "fornitore": "Octopus", "tipo_prezzo": "fisso", "durata_mesi": 12, "aggiornato": "2026-09-04", "fonte": "Box offerta nelle tue bollette", "nota": "Riferimento, scade 31/10/2026.", "prezzo_kwh": 0.108468, "fisso_luce_annuo": 72, "prezzo_smc": 0.37, "fisso_gas_annuo": 84},
   {"nome": "Octopus Fissa 12M set-2026", "fornitore": "Octopus", "tipo_prezzo": "fisso", "durata_mesi": 12, "aggiornato": "2026-09-16", "fonte": "bolletta-energia.it 16/09/2026", "nota": "", "prezzo_kwh": 0.1386, "fisso_luce_annuo": 72, "prezzo_smc": 0.573, "fisso_gas_annuo": 84},
   {"nome": "Octopus Flex stimata (PUN+PSV ago-26)", "fornitore": "Octopus", "tipo_prezzo": "indicizzato", "durata_mesi": 12, "aggiornato": "2026-09-16", "fonte": "Spread Octopus + PUN 0,18 PSV 0,6876", "nota": "", "prezzo_kwh": 0.1888, "spread_kwh": 0.0088, "fisso_luce_annuo": 72, "prezzo_smc": 0.7476, "spread_smc": 0.06, "fisso_gas_annuo": 84},
   {"nome": "Engie PuntoFisso 12M", "fornitore": "Engie", "tipo_prezzo": "fisso", "durata_mesi": 12, "aggiornato": "2026-09-02", "fonte": "engie.it", "nota": "Fasce F1 0,1416 F2 0,1569 F3 0,1278.", "prezzo_kwh": 0.1409, "f1": 0.1416, "f2": 0.1569, "f3": 0.1278, "fisso_luce_annuo": 72, "prezzo_smc": 0.599, "fisso_gas_annuo": 84},
@@ -125,7 +124,7 @@ function renderBollette() {
   const tot = media(l, "spesa_annua") + media(g, "spesa_annua");
   $("riepilogo").textContent = bollette.length
     ? `Consumi circa ${media(l, "consumo_annuo").toFixed(0)} kWh di luce e ${media(g, "consumo_annuo").toFixed(0)} Smc di gas all'anno. Oggi spendi circa €${tot.toFixed(0)} all'anno.${fn ? " " + fn + "." : ""}`
-    : "Nessuna bolletta: carica i PDF oppure premi «Usa i miei consumi salvati».";
+    : "Nessuna bolletta: carica i PDF oppure prova con consumi di esempio.";
   renderStorico();
 }
 
@@ -168,7 +167,7 @@ let ultimo = [];
 
 function confronta() {
   if (!offerte.length) { $("out").textContent = "DB offerte non caricato: ricarica la pagina."; return; }
-  if (!bollette.length) { $("out").textContent = "Carica almeno una bolletta o usa i consumi demo."; return; }
+  if (!bollette.length) { $("out").textContent = "Carica almeno una bolletta al punto 1."; return; }
   const ut = $("utenza").value;
   const mode = $("tariffa").value;
   const p1 = +$("p-f1").value || 0, p2 = +$("p-f2").value || 0, p3 = +$("p-f3").value || 0;
@@ -352,7 +351,7 @@ function verdetto(bestL, bestG) {
 function classificaArera() {
   const el = $("arera-out");
   el.innerHTML = "";
-  if (!bollette.length) { el.textContent = "Carica prima le bollette (punto 1) o usa i consumi demo."; return; }
+  if (!bollette.length) { el.textContent = "Carica prima le bollette al punto 1."; return; }
   if (!arera.luce.length && !arera.gas.length) { el.textContent = "offerte_arera.json non caricato."; return; }
   const ut = $("utenza").value;
   const mode = $("tariffa").value;
@@ -437,14 +436,14 @@ function classificaArera() {
 }
 
 function mostraScadenza() {
-  const sc = offerte.map((o) => o.scadenza_offerta ? { nome: o.nome, sc: o.scadenza_offerta } : null).filter(Boolean);
-  if (!sc.length) return;
-  const gg = Math.round((new Date(sc[0].sc) - new Date()) / 864e5);
+  const sc = ($("mia-scadenza") || {}).value || "";
   const a = $("alert");
+  if (!sc) { a.hidden = true; return; }
+  const gg = Math.round((new Date(sc) - new Date()) / 864e5);
   a.hidden = false;
-  a.innerHTML = gg < 0 ? `<b class="warn">⚠ ${sc[0].nome} SCADUTA il ${sc[0].sc}.</b>`
-    : gg < 60 ? `<b class="warn">⚠ ${sc[0].nome} scade tra ${gg} giorni (${sc[0].sc}): confronta ora le alternative.</b>`
-    : `${sc[0].nome}: scade tra ${gg} giorni (${sc[0].sc}).`;
+  a.innerHTML = gg < 0 ? `<b class="warn">⚠ La tua offerta attuale è SCADUTA il ${dataIt(sc)}.</b>`
+    : gg < 60 ? `<b class="warn">⚠ La tua offerta attuale scade tra ${gg} giorni (${dataIt(sc)}): confronta ora le alternative.</b>`
+    : `La tua offerta attuale scade tra ${gg} giorni (${dataIt(sc)}).`;
 }
 
 async function init() {
@@ -487,6 +486,7 @@ async function init() {
   ["arera-nodep", "arera-verde", "arera-noti"].forEach((id) => {
     $(id).addEventListener("change", ricalcola);
   });
+  $("mia-scadenza").addEventListener("change", mostraScadenza);
   let cercaTimer = null;
   $("arera-q").addEventListener("input", () => {
     clearTimeout(cercaTimer);
@@ -518,6 +518,7 @@ async function init() {
     const dati = {
       bollette, utenza: $("utenza").value, tariffa: $("tariffa").value,
       p1: $("p-f1").value, p2: $("p-f2").value, p3: $("p-f3").value,
+      scadenza: $("mia-scadenza").value,
     };
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([JSON.stringify(dati)], { type: "application/json" }));
@@ -537,6 +538,7 @@ async function init() {
         if (d.utenza) $("utenza").value = d.utenza;
         if (d.tariffa) $("tariffa").value = d.tariffa;
         if (d.p1) { $("p-f1").value = d.p1; $("p-f2").value = d.p2; $("p-f3").value = d.p3; }
+        if (d.scadenza) { $("mia-scadenza").value = d.scadenza; mostraScadenza(); }
         renderBollette();
         if (bollette.length) { confronta(); classificaArera(); }
       } catch { /* file non valido */ }

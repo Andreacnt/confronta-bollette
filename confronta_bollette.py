@@ -468,10 +468,21 @@ def main() -> int:
 
     try:
         offerte = carica_offerte(Path(args.offerte))
+        mie = base / "mie_offerte.json"
+        if mie.exists():
+            offerte += carica_offerte(mie)
     except (FileNotFoundError, ValueError, json.JSONDecodeError) as e:
         print(f"[!] Offerte non caricate: {e}", file=sys.stderr)
         return 1
-    avviso_scadenza(json.loads(Path(args.offerte).read_text(encoding="utf-8")))
+    grezzo: list[dict] = []
+    for f in (Path(args.offerte), base / "mie_offerte.json"):
+        if f.exists():
+            try:
+                d = json.loads(f.read_text(encoding="utf-8"))
+                grezzo += d if isinstance(d, list) else d.get("offerte", [])
+            except json.JSONDecodeError:
+                pass
+    avviso_scadenza(grezzo)
 
     for o in offerte:
         o.costo_simulato = round(cons_luce * o.prezzo_kwh + o.fisso_luce_annuo + cons_gas * o.prezzo_smc + o.fisso_gas_annuo, 2)
