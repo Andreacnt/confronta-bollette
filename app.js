@@ -313,7 +313,7 @@ function tabellaArera(el, righe, unita, conTotale) {
     const gg = ggScadenza(r.o.scadenza);
     const avviso = gg == null ? "" : gg < 0 ? ` · <b class="warn">scaduta</b>` : gg <= 7 ? ` · <b class="warn">scade tra ${gg} gg!</b>` : "";
     tr.innerHTML = `<td class="${i === 0 ? "best" : ""}">${i + 1}</td>
-      <td><b>${r.o.venditore}</b> · ${r.o.nome}<br><span class="mut">${r.o.tipo_prezzo} · ${r.o.fascia === "fasce" ? "a fasce" : "prezzo unico"}${r.o.scadenza ? " · valida fino al " + dataIt(r.o.scadenza) : ""}${avviso}${flags ? " · " + flags : ""} · <a href="${r.o.url}" target="_blank" rel="noopener">scheda e contratto</a></span></td>
+      <td><b>${r.o.venditore}</b> · ${r.o.nome}<br><span class="mut">${r.o.tipo_prezzo}${r.o.durata_mesi ? (r.o.tipo_prezzo === "fisso" ? ` · bloccato ${r.o.durata_mesi} mesi` : ` · spread fermo ${r.o.durata_mesi} mesi`) : ""} · ${r.o.fascia === "fasce" ? "a fasce" : "prezzo unico"}${r.o.scadenza ? " · attivabile fino al " + dataIt(r.o.scadenza) : ""}${avviso}${flags ? " · " + flags : ""} · <a href="${r.o.url}" target="_blank" rel="noopener">scheda e contratto</a></span></td>
       <td class="opt">€${r.p.toFixed(4)}/${unita}</td><td class="opt">€${r.o.quota_fissa_annua.toFixed(0)}</td>
       <td class="${i === 0 ? "best" : ""}">€${r.costo.toFixed(2)}</td>${conTotale ? `<td>€${r.tot.toFixed(2)}</td>` : ""}
       <td>${r.risp == null ? "—" : "€" + r.risp.toFixed(2)}</td>`;

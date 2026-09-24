@@ -111,11 +111,17 @@ def parse_xml(path: Path, commodity: str) -> tuple[list[dict], int]:
         sito = det.findtext("n:Contatti/n:URL_SITO_VENDITORE", namespaces=NS)
         tipo = "fisso" if det.findtext("n:TIPO_OFFERTA", namespaces=NS) == "01" else "indicizzato"
         nome = (det.findtext("n:NOME_OFFERTA", namespaces=NS) or "").strip()
+        try:
+            durata = int(det.findtext("n:DURATA", namespaces=NS) or -1)
+            durata = durata if durata > 0 else None
+        except (TypeError, ValueError):
+            durata = None
         rec: dict = {
             "venditore": dominio(sito),
             "nome": nome,
             "cod_offerta": o.findtext("n:IdentificativiOfferta/n:COD_OFFERTA", namespaces=NS),
             "tipo_prezzo": tipo,
+            "durata_mesi": durata,
             "quota_fissa_annua": round(sum(quota.values()), 2),
             "url": det.findtext("n:Contatti/n:URL_OFFERTA", namespaces=NS) or (f"https://{sito}" if sito else ""),
             "scadenza": fine.isoformat() if fine else "",
