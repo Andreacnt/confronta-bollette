@@ -180,6 +180,10 @@ function confronta() {
   if (!offerte.length) { $("out").textContent = "DB offerte non caricato: ricarica la pagina."; return; }
   if (!bollette.length) { $("out").textContent = "Carica almeno una bolletta al punto 1."; return; }
   const ut = $("utenza").value;
+  if ((ut === "luce" && !bollette.some((x) => x.tipo === "luce")) || (ut === "gas" && !bollette.some((x) => x.tipo === "gas"))) {
+    $("out").textContent = "Carica una bolletta del tipo selezionato al punto 1.";
+    return;
+  }
   const mode = $("tariffa").value;
   const p1 = +$("p-f1").value || 0, p2 = +$("p-f2").value || 0, p3 = +$("p-f3").value || 0;
   const pun = num($("pun").value), psv = num($("psv").value);
@@ -385,10 +389,13 @@ function classificaArera() {
     .filter(Boolean).map((r) => ({ ...r, tot: totFn ? totFn(r.p, r.o.quota_fissa_annua) : 0, risp: +(spesa - r.costo).toFixed(2) }))
     .sort((a, b) => a.costo - b.costo);
   let bestL = [], bestG = [];
+  const haL = (ut === "luce" || ut === "dual") && bollette.some((x) => x.tipo === "luce");
+  const haG = (ut === "gas" || ut === "dual") && bollette.some((x) => x.tipo === "gas");
+  if (!haL && !haG) { el.textContent = "Carica una bolletta del tipo selezionato al punto 1."; return; }
   const full = $("arera-full");
   full.innerHTML = "";
   const notaHtml = `⚠ <b>Prima di firmare verifica sempre prezzo e condizioni sul sito del gestore</b> (clicca «scheda e contratto»): le offerte scadono in pochi giorni e i prezzi cambiano spesso.`;
-  if (ut !== "gas") {
+  if (haL) {
     const l = bollette.filter((x) => x.tipo === "luce");
     const cl = media(l, "consumo_annuo"), sl = media(l, "spesa_annua");
     bestL = rank(arera.luce, (o) => pkArera(o, mode, p1, p2, p3, pun), cl, sl, conTot ? (p, qu) => totaleLuce(p, qu, cl) : null);
@@ -399,7 +406,7 @@ function classificaArera() {
     full.appendChild(hf);
     tabellaArera(full, bestL.slice(0, n), "kWh", conTot);
   }
-  if (ut !== "luce") {
+  if (haG) {
     const g = bollette.filter((x) => x.tipo === "gas");
     const cg = media(g, "consumo_annuo"), sg = media(g, "spesa_annua");
     bestG = rank(arera.gas, (o) => pgArera(o, psv), cg, sg, conTot ? (p, qu) => totaleGas(p, qu, cg, ambito) : null);
@@ -459,6 +466,7 @@ function mostraScadenza() {
   a.hidden = false;
   a.innerHTML = trovate.map(({ etichetta, sc }) => {
     const gg = Math.round((new Date(sc) - new Date()) / 864e5);
+    if (!Number.isFinite(gg)) return `La tua ${etichetta} scade il ${dataIt(sc)}.`;
     return gg < 0 ? `<b class="warn">⚠ La tua ${etichetta} è SCADUTA il ${dataIt(sc)}.</b>`
       : gg < 60 ? `<b class="warn">⚠ La tua ${etichetta} scade tra ${gg} giorni (${dataIt(sc)}): confronta ora le alternative.</b>`
       : `La tua ${etichetta} scade tra ${gg} giorni (${dataIt(sc)}).`;
