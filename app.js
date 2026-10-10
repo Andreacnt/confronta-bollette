@@ -491,26 +491,27 @@ function aggiornaBarraDb(extra) {
     : "Database ARERA non caricato.";
 }
 
+const REPO_DATI = "https://raw.githubusercontent.com/Andreacnt/confronta-bollette/main/offerte_arera.json";
+
 async function verificaAggiornamenti() {
   const b = $("dbbar");
-  const istr = "Per aggiornare, da PC esegui: python aggiorna_offerte_arera.py --inline arera_data.js e ricarica la pagina.";
+  b.textContent = "Controllo aggiornamenti…";
   try {
-    const r = await fetch("https://www.ilportaleofferte.it/portaleOfferte/it/open-data.page", { cache: "no-store" });
+    const r = await fetch(REPO_DATI, { cache: "no-store" });
     if (!r.ok) throw 0;
-    const t = await r.text();
-    let max = "";
-    const re = /PO_Offerte_[EG]_MLIBERO_(\d{8})/g;
-    let m;
-    while ((m = re.exec(t))) if (m[1] > max) max = m[1];
-    if (!max) throw 0;
-    const mia = (arera.data || "").replaceAll("-", "");
-    if (max > mia) {
-      b.textContent = `C'è un aggiornamento! Dati online al ${max.slice(6)}/${max.slice(4, 6)}/${max.slice(0, 4)}, tu hai quelli del ${dataIt(arera.data)}. ${istr}`;
+    const j = await r.json();
+    if (!j.luce || !j.generato) throw 0;
+    if ((j.generato || "") > (arera.data || "")) {
+      applicaAreraDati(j, " (aggiornati ora)");
+      mostraScadenza();
+      classificaMercato();
+      if (bollette.length) { confronta(); classificaArera(); }
+      b.textContent = `Database aggiornato al ${dataIt(arera.data)} (${arera.luce.length + arera.gas.length} offerte). Classifiche ricalcolate.`;
     } else {
       b.textContent = `Hai già gli ultimi dati ARERA (${dataIt(arera.data)}). Ricontrolla tra qualche giorno.`;
     }
   } catch {
-    b.textContent = `Controllo non riuscito dal browser (serve connessione al Portale Offerte). ${istr}`;
+    b.textContent = "Controllo non riuscito (serve connessione). Da PC puoi aggiornare con: python aggiorna_offerte_arera.py --inline arera_data.js";
   }
 }
 
@@ -569,6 +570,43 @@ function classificaFinale(el, bestL, bestG, conTot) {
   el.appendChild(p);
 }
 
+function applicaAreraDati(j2, fonte) {
+  arera.luce = j2.luce || []; arera.gas = j2.gas || [];
+  arera.pun_rif = j2.pun_rif || 0; arera.psv_rif = j2.psv_rif || 0; arera.data = j2.generato || "";
+  arera.parametri = j2.parametri || { E: {}, G: {} };
+  arera.mercato = j2.mercato || null;
+  if (arera.pun_rif) $("pun").value = arera.pun_rif;
+  if (arera.psv_rif) $("psv").value = arera.psv_rif;
+  $("stato-arera").textContent = `${arera.luce.length + arera.gas.length} offerte del ${arera.data}${fonte}`;
+  aggiornaBarraDb(fonte);
+  classificaMercato();
+  disegnaMercato();
+}
+
+function disegnaMercato() {
+  const el = $("mercato-prezzi");
+  const m = arera.mercato;
+  if (!m || !(m.pun || []).length) { el.innerHTML = '<p class="mut">Storico prezzi non disponibile: aggiorna i dati.</p>'; return; }
+  const fmtMese = (s) => { const mt = /^(\d{4})-(\d{2})/.exec(s || ""); return mt ? `${mt[2]}/${mt[1]}` : s; };
+  const scheda = (titolo, serie, unita, rif) => {
+    const ult = serie[serie.length - 1];
+    const prec = serie[Math.max(0, serie.length - 4)];
+    const d = prec.valore ? ((ult.valore - prec.valore) / prec.valore) * 100 : 0;
+    const mx = Math.max(...serie.map((s) => s.valore));
+    const freccia = d > 2 ? "📈 in salita" : d < -2 ? "📉 in discesa" : "➡️ stabile";
+    let barre = '<div style="display:flex;gap:3px;align-items:end;height:56px;margin-top:6px">';
+    serie.forEach((s) => {
+      barre += `<div title="${fmtMese(s.mese)}: €${s.valore.toFixed(4)}" style="flex:1;background:#4cc38a;border-radius:3px;height:${Math.max(4, Math.round((s.valore / mx) * 52))}px"></div>`;
+    });
+    barre += "</div>";
+    const mesi = `<div class="mut" style="display:flex;justify-content:space-between"><span>${fmtMese(serie[0].mese)}</span><span>${fmtMese(ult.mese)}</span></div>`;
+    return `<div style="flex:1;min-width:240px"><h2>${titolo}: <b>€${ult.valore.toFixed(4)}/${unita}</b> <span class="mut">(${fmtMese(ult.mese)})</span></h2><p class="mut" style="margin:0">${freccia} (${d >= 0 ? "+" : ""}${d.toFixed(1)}% in 3 mesi) · valore usato per stimare le offerte variabili: €${rif.toFixed(4)}</p>${barre}${mesi}</div>`;
+  };
+  el.innerHTML = `<div style="display:flex;gap:16px;flex-wrap:wrap">`
+    + scheda("PUN luce", m.pun, "kWh", arera.pun_rif)
+    + scheda("PSV gas", m.psv, "Smc", arera.psv_rif) + `</div>`;
+}
+
 function mostraScadenza() {
   const a = $("alert");
   const trovate = [];
@@ -599,25 +637,15 @@ async function init() {
     (Array.isArray(j) ? j : j.offerte || []).forEach((o) => offerte.push(o));
   } catch { FALLBACK.forEach((o) => offerte.push(o)); viaFile = true; }
   renderDb();
-  const applicaArera = (j2, fonte) => {
-    arera.luce = j2.luce || []; arera.gas = j2.gas || [];
-    arera.pun_rif = j2.pun_rif || 0; arera.psv_rif = j2.psv_rif || 0; arera.data = j2.generato || "";
-    arera.parametri = j2.parametri || { E: {}, G: {} };
-    if (arera.pun_rif) $("pun").value = arera.pun_rif;
-    if (arera.psv_rif) $("psv").value = arera.psv_rif;
-    $("stato-arera").textContent = `${arera.luce.length + arera.gas.length} offerte del ${arera.data}${fonte}`;
-    aggiornaBarraDb(fonte);
-    classificaMercato();
-  };
   try {
     const r2 = await fetch("offerte_arera.json", { cache: "no-store" });
     if (!r2.ok) throw 0;
-    applicaArera(await r2.json(), viaFile ? " (offline)" : "");
+    applicaAreraDati(await r2.json(), viaFile ? " (offline)" : "");
     mostraScadenza();
     $("arera-out").textContent = "Dati pronti: carica le bollette al punto 1.";
   } catch {
     if (window.ARERA_DATA && window.ARERA_DATA.luce) {
-      applicaArera(window.ARERA_DATA, " (inclusi)");
+      applicaAreraDati(window.ARERA_DATA, " (inclusi)");
       mostraScadenza();
       $("arera-out").textContent = "Dati pronti: carica le bollette al punto 1.";
     } else {

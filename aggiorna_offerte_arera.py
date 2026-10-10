@@ -170,6 +170,27 @@ def ultimi_indici() -> tuple[float, float]:
         return 0.18, 0.6876
 
 
+def storico_mercato() -> dict:
+    try:
+        testo = scarica_testo(STORICI)
+        if not testo:
+            raise ValueError("storici non scaricati")
+        righe = [x for x in csv.reader(testo.splitlines()[1:], delimiter=";") if len(x) >= 3]
+        serie: dict = {"pun": [], "psv": []}
+        for r in righe[-12:]:
+            mese = r[0].strip()
+            mese_iso = f"{mese[:4]}-{mese[4:6]}" if len(mese) == 6 and mese.isdigit() else mese
+            try:
+                serie["pun"].append({"mese": mese_iso, "valore": float(r[1].replace(",", "."))})
+                serie["psv"].append({"mese": mese_iso, "valore": float(r[2].replace(",", "."))})
+            except ValueError:
+                continue
+        return serie
+    except (URLError, OSError, ValueError, IndexError) as e:
+        print(f"[!] storico mercato non letto ({e})", file=sys.stderr)
+        return {"pun": [], "psv": []}
+
+
 def scarica_parametri(commodity: str) -> dict[str, float]:
     for i in range(12):
         d = date.today() - timedelta(days=i)
@@ -201,7 +222,8 @@ def main() -> int:
     tmp.mkdir(exist_ok=True)
     pun, psv = ultimi_indici()
     out: dict = {"generato": date.today().isoformat(), "pun_rif": pun, "psv_rif": psv, "fonte": "Portale Offerte ARERA open data (CC-BY)",
-                 "parametri": {"E": scarica_parametri("E"), "G": scarica_parametri("G")}}
+                 "parametri": {"E": scarica_parametri("E"), "G": scarica_parametri("G")},
+                 "mercato": storico_mercato()}
     for commodity, chiave in (("E", "luce"), ("G", "gas")):
         trovato = trova_file(commodity, tmp)
         if not trovato:
