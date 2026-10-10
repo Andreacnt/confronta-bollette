@@ -340,28 +340,39 @@ function ggScadenza(s) {
 
 const GRANDI = ["enel", "eni", "plenitude", "edison", "a2a", "hera", "acea", "engie", "eon", "sorgenia", "octopus", "dolomiti", "iren"];
 
-function verdetto(bestL, bestG) {
+function verdetto(listL, listG) {
   const el = $("verdetto");
   const l = bollette.filter((x) => x.tipo === "luce");
   const g = bollette.filter((x) => x.tipo === "gas");
   const spesa = media(l, "spesa_annua") + media(g, "spesa_annua");
   if (!spesa) { el.textContent = "Carica prima le bollette al punto 1."; return; }
   const val = (b) => (b ? (arera.conTot === false ? b.costo : b.tot) : 0);
-  const totL = val(bestL), totG = val(bestG);
-  if ((!totL && !totG) || (!bestL && !bestG)) { el.textContent = "Nessuna offerta trovata con questi filtri: allarga la ricerca."; return; }
-  const stima = totL + totG;
+  const bestL = listL[0], bestG = listG[0];
+  if ((!val(bestL) && !val(bestG)) || (!bestL && !bestG)) { el.textContent = "Nessuna offerta trovata con questi filtri: allarga la ricerca."; return; }
+  const perVend = {};
+  listG.forEach((r) => { perVend[(r.o.venditore || "").toLowerCase()] = r; });
+  let singolo = null;
+  for (const r of listL) {
+    const m = perVend[(r.o.venditore || "").toLowerCase()];
+    if (m) { singolo = { vend: r.o.venditore, tot: val(r) + val(m) }; break; }
+  }
+  const stima = val(bestL) + val(bestG);
   const risp = Math.round(spesa - stima);
+  const opzioni = `<div style="margin-top:10px">`
+    + (singolo ? `<div>🏠 <b>Un solo gestore</b> (${singolo.vend}): circa <b>€${Math.round(singolo.tot)}/anno</b></div>` : ``)
+    + ((bestL && bestG) ? `<div>🔀 <b>Due gestori</b> (${bestL.o.venditore} + ${bestG.o.venditore}): circa <b>€${Math.round(stima)}/anno</b></div>` : ``)
+    + `</div>`;
   el.classList.remove("mut");
   if (risp > 50) {
     const stesso = bestL && bestG && (bestL.o.venditore || "").toLowerCase() === (bestG.o.venditore || "").toLowerCase();
     const nomi = stesso ? `${bestL.o.venditore} per luce e gas`
       : [bestL && `luce con ${bestL.o.venditore} (${bestL.o.nome})`, bestG && `gas con ${bestG.o.venditore} (${bestG.o.nome})`].filter(Boolean).join(" e ");
     const nota = arera.conTot === false ? " (confronto sulla sola energia, senza oneri e IVA)" : "";
-    el.innerHTML = `💡 <b>Ti conviene cambiare.</b> Passando a ${nomi} spenderesti circa <b>€${Math.round(stima)}/anno</b> invece di €${Math.round(spesa)}: <b class="best">risparmi circa €${risp} all'anno</b>${nota}.${barre(spesa, stima)}`;
+    el.innerHTML = `💡 <b>Ti conviene cambiare.</b> Passando a ${nomi} spenderesti circa <b>€${Math.round(stima)}/anno</b> invece di €${Math.round(spesa)}: <b class="best">risparmi circa €${risp} all'anno</b>${nota}.${opzioni}${barre(spesa, stima)}`;
   } else if (risp >= 0) {
-    el.innerHTML = `👍 <b>Resta dove sei.</b> La tua spesa (€${Math.round(spesa)}/anno) è già in linea con le migliori offerte (migliore stima: €${Math.round(stima)}/anno). Ricontrolla quando la tua offerta scade.${barre(spesa, stima)}`;
+    el.innerHTML = `👍 <b>Resta dove sei.</b> La tua spesa (€${Math.round(spesa)}/anno) è già in linea con le migliori offerte (migliore stima: €${Math.round(stima)}/anno). Ricontrolla quando la tua offerta scade.${opzioni}${barre(spesa, stima)}`;
   } else {
-    el.innerHTML = `👍 <b>Resta dove sei.</b> Oggi spendi €${Math.round(spesa)}/anno e le alternative costano di più (da €${Math.round(stima)}/anno). La tua offerta attuale è ottima.${barre(spesa, stima)}`;
+    el.innerHTML = `👍 <b>Resta dove sei.</b> Oggi spendi €${Math.round(spesa)}/anno e le alternative costano di più (da €${Math.round(stima)}/anno). La tua offerta attuale è ottima.${opzioni}${barre(spesa, stima)}`;
   }
 }
 
@@ -435,7 +446,7 @@ function classificaArera() {
     pr.innerHTML = `🔁 <b>Se resti con Octopus</b> al prezzo di oggi (Fissa 12M): bolletta stimata <b>€${Math.round(t)}/anno</b>.`;
     el.appendChild(pr);
   }
-  verdetto(bestL[0], bestG[0]);
+  verdetto(bestL, bestG);
   [el, full].forEach((cont) => {
     const av = document.createElement("p");
     av.className = "mut";
